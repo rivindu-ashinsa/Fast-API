@@ -7,3 +7,4 @@ class Blog(Base):
     title = Column(String)
     body = Column(String)
 
+
