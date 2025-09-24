@@ -1,5 +1,8 @@
 from passlib.context import CryptContext
 
+ct =  CryptContext(schemes=["bcrypt"], deprecated="auto")
 class Hash():
     def bcrypt(password):
-        return CryptContext(schemes=["bcrypt"], deprecated="auto").hash(password)
+        return ct.hash(password)
+    def verify(user_pw, request_pw):
+        return ct.verify(request_pw, user_pw)
