@@ -4,6 +4,7 @@ from typing import List
 from ..database import get_db
 from sqlalchemy.orm import Session
 from ..repository import blog
+from ..oauth2 import get_current_user
 
 
 router = APIRouter(
@@ -13,7 +14,10 @@ router = APIRouter(
 
 
 @router.get("/", status_code=200, response_model=List[schemas.ShowBlog])
-def all(db: Session = Depends(get_db)):
+def all(
+    db: Session = Depends(get_db),
+    current_user: schemas.User = Depends(get_current_user)
+):
     return blog.all(db)
 
 
